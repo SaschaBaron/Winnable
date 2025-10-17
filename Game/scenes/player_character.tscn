@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcwpx2hc0bx3r"]
+
+[ext_resource type="Script" uid="uid://v7dynirfehbs" path="res://Game/scenes/player_character.gd" id="1_cb3tt"]
+
+[sub_resource type="Gradient" id="Gradient_cb3tt"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vqku4"]
+gradient = SubResource("Gradient_cb3tt")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb3tt"]
+size = Vector2(8, 8)
+
+[node name="PlayerCharacter" type="Area2D"]
+script = ExtResource("1_cb3tt")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture1D_vqku4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cb3tt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
