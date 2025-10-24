@@ -1,26 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcwpx2hc0bx3r"]
+[gd_scene load_steps=9 format=3 uid="uid://bcwpx2hc0bx3r"]
 
 [ext_resource type="Script" uid="uid://v7dynirfehbs" path="res://Game/GD_Script/player_character.gd" id="1_cb3tt"]
+[ext_resource type="Texture2D" uid="uid://bg1ptamrj8a3w" path="res://Game/assets/Free Character Sprites - Fantasy Dreamland/16x16/Char_001_Idle.png" id="2_vqku4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb3tt"]
-size = Vector2(17.5, 17.5)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5xo3"]
+atlas = ExtResource("2_vqku4")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otam0"]
+atlas = ExtResource("2_vqku4")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32d0p"]
+atlas = ExtResource("2_vqku4")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2lsu"]
+atlas = ExtResource("2_vqku4")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p68fl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5xo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otam0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32d0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2lsu")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqku4"]
+size = Vector2(12, 19)
 
 [node name="PlayerCharacter" type="Area2D"]
 script = ExtResource("1_cb3tt")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_p68fl")
+animation = &"Idle"
+autoplay = "Idle"
+speed_scale = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cb3tt")
-debug_color = Color(0.92905486, 3.1862557e-05, 0.66422683, 0.41960785)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(20, 20)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_vqku4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
